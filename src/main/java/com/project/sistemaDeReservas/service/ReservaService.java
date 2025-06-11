@@ -1,5 +1,6 @@
 package com.project.sistemaDeReservas.service;
 
+import com.project.sistemaDeReservas.dto.ReservaDTO;
 import com.project.sistemaDeReservas.model.Local;
 import com.project.sistemaDeReservas.model.Reserva;
 import com.project.sistemaDeReservas.model.Usuario;
@@ -23,7 +24,7 @@ public class ReservaService {
         this.usuarioRepository = usuarioRepository;
     }
 
-    public Reserva salvar(Reserva reserva) {
+    public ReservaDTO salvar(Reserva reserva) {
         Long usuarioId = reserva.getUsuario().getId();
         Long localId = reserva.getLocal().getId();
 
@@ -35,7 +36,9 @@ public class ReservaService {
         reserva.setUsuario(usuario);
         reserva.setLocal(local);
 
-        return reservaRepository.save(reserva);
+        Reserva reservaSalva = reservaRepository.save(reserva);
+
+        return toDTO(reservaSalva);
     }
 
     public List<Reserva> listarTodas() {
@@ -62,5 +65,23 @@ public class ReservaService {
 
     public void cancelarReserva(Long id) {
         reservaRepository.deleteById(id);
+    }
+
+    public ReservaDTO toDTO(Reserva reserva) {
+        ReservaDTO dto = new ReservaDTO();
+
+        dto.setId(reserva.getId());
+        dto.setInicio(reserva.getInicio());
+        dto.setEncerramento(reserva.getEncerramento());
+
+        if (reserva.getUsuario() != null) {
+            dto.setUsuarioNome(reserva.getUsuario().getNome());
+        }
+
+        if(reserva.getLocal() != null) {
+            dto.setLocalNome(reserva.getLocal().getNome());
+        }
+
+        return dto;
     }
 }

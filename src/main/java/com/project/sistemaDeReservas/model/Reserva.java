@@ -1,5 +1,6 @@
 package com.project.sistemaDeReservas.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -28,9 +29,11 @@ public class Reserva {
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")
+    @JsonBackReference
     private Usuario usuario;
 
     @ManyToOne
     @JoinColumn(name = "local_id")
+    @JsonBackReference(value = "local-reservas")
     private Local local;
 }

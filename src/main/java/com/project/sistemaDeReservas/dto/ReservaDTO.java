@@ -16,6 +16,6 @@ public class ReservaDTO {
     private Long id;
     private LocalDateTime inicio;
     private LocalDateTime encerramento;
-    private Long localId;
     private String localNome;
+    private String usuarioNome;
 }

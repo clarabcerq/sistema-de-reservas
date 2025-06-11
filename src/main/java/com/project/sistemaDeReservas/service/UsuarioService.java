@@ -22,11 +22,13 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
 
-    public Usuario salvar(Usuario usuario) {
+    public UsuarioDTO salvar(Usuario usuario) {
         String senhaCriptografada = passwordEncoder.encode(usuario.getSenha());
         usuario.setSenha(senhaCriptografada);
 
-        return usuarioRepository.save(usuario);
+        Usuario usuarioSalvo = usuarioRepository.save(usuario);
+
+        return toDTO(usuarioSalvo);
     }
 
     public List<Usuario> buscarTodos() {
@@ -37,15 +39,19 @@ public class UsuarioService {
         return usuarioRepository.findById(id);
     }
 
-    public Usuario atualizar(Usuario usuarioAtualizado, Long id) {
+    public UsuarioDTO atualizar(Usuario usuarioAtualizado, Long id) {
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 
         usuario.setNome(usuarioAtualizado.getNome());
         usuario.setEmail(usuarioAtualizado.getEmail());
-        usuario.setSenha(usuarioAtualizado.getSenha());
 
-        return usuarioRepository.save(usuario);
+        String senhaCriptografada = passwordEncoder.encode(usuarioAtualizado.getSenha());
+        usuario.setSenha(senhaCriptografada);
+
+        Usuario usuarioSalvo = usuarioRepository.save(usuario);
+
+        return toDTO(usuarioSalvo);
     }
 
     public void deletar(Long id) {

@@ -18,7 +18,8 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public Usuario salvarUsuario(@RequestBody Usuario usuario) {
+    public UsuarioDTO salvarUsuario(@RequestBody Usuario usuario) {
+
         return usuarioService.salvar(usuario);
     }
 
@@ -36,7 +37,7 @@ public class UsuarioController {
     }
 
     @PutMapping("/{id}")
-    public Usuario atualizar(@RequestBody Usuario usuario, @PathVariable Long id) {
+    public UsuarioDTO atualizar(@RequestBody Usuario usuario, @PathVariable Long id) {
         return usuarioService.atualizar(usuario, id);
     }
 

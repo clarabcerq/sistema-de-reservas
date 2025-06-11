@@ -12,7 +12,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class LocalDTO {
 
-    private Long id;
     private String nome;
     private TipoLocal tipo;
     private String endereco;

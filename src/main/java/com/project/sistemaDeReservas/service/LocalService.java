@@ -1,5 +1,6 @@
 package com.project.sistemaDeReservas.service;
 
+import com.project.sistemaDeReservas.dto.LocalDTO;
 import com.project.sistemaDeReservas.model.Local;
 import com.project.sistemaDeReservas.repository.LocalRepository;
 import org.springframework.stereotype.Service;
@@ -41,5 +42,13 @@ public class LocalService {
 
     public void deletar(Long id) {
         localRepository.deleteById(id);
+    }
+
+    public LocalDTO toDTO(Local local) {
+        return new LocalDTO(
+                local.getNome(),
+                local.getTipo(),
+                local.getEndereco()
+        );
     }
 }

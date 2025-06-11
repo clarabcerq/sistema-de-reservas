@@ -1,5 +1,6 @@
 package com.project.sistemaDeReservas.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,8 +10,8 @@ import lombok.Setter;
 import java.util.Set;
 
 @Entity
-@Getter
 @Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Usuario {
@@ -30,5 +31,6 @@ public class Usuario {
     private Role role;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private Set<Reserva> reservas;
 }

@@ -1,5 +1,6 @@
 package com.project.sistemaDeReservas.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,5 +28,6 @@ public class Local {
     private String endereco;
 
     @OneToMany(mappedBy = "local", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference(value = "local-reservas")
     private Set<Reserva> reservas;
 }

@@ -1,5 +1,6 @@
 package com.project.sistemaDeReservas.controller;
 
+import com.project.sistemaDeReservas.dto.ReservaDTO;
 import com.project.sistemaDeReservas.model.Reserva;
 import com.project.sistemaDeReservas.repository.ReservaRepository;
 import com.project.sistemaDeReservas.service.ReservaService;
@@ -18,7 +19,7 @@ public class ReservaController {
     }
 
     @PostMapping
-    public Reserva salvarReserva(@RequestBody Reserva reserva) {
+    public ReservaDTO salvarReserva(@RequestBody Reserva reserva) {
         return reservaService.salvar(reserva);
     }
 
