@@ -24,7 +24,8 @@ public class UsuarioController {
     }
 
     @GetMapping
-    public List<Usuario> listarUsuarios() {
+    public List<UsuarioDTO> listarUsuarios() {
+
         return usuarioService.buscarTodos();
     }
 

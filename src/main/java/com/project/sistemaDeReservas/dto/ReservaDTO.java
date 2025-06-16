@@ -1,5 +1,6 @@
 package com.project.sistemaDeReservas.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,9 @@ import java.time.LocalDateTime;
 public class ReservaDTO {
 
     private Long id;
+    @JsonFormat(pattern = "dd-MM-yyyy HH:mm")
     private LocalDateTime inicio;
+    @JsonFormat(pattern = "dd-MM-yyyy HH:mm")
     private LocalDateTime encerramento;
     private String localNome;
     private String usuarioNome;
