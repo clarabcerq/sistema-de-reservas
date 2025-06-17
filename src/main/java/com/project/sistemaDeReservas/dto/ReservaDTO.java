@@ -19,6 +19,6 @@ public class ReservaDTO {
     private LocalDateTime inicio;
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm")
     private LocalDateTime encerramento;
-    private String localNome;
     private String usuarioNome;
+    private String localNome;
 }

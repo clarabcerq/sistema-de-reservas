@@ -9,6 +9,7 @@ import com.project.sistemaDeReservas.repository.ReservaRepository;
 import com.project.sistemaDeReservas.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -41,15 +42,22 @@ public class ReservaService {
         return toDTO(reservaSalva);
     }
 
-    public List<Reserva> listarTodas() {
-        return reservaRepository.findAll();
+    public List<ReservaDTO> listarTodas() {
+        List<Reserva> reservas = reservaRepository.findAll();
+        List<ReservaDTO> reservasDTO = new ArrayList<>();
+
+        for (Reserva reserva : reservas) {
+            reservasDTO.add(toDTO(reserva));
+        }
+
+        return reservasDTO;
     }
 
     public List<Reserva> buscarReservasPorUsuario(Long usuarioId) {
         Usuario usuario = usuarioRepository.findById(usuarioId)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 
-        return reservaRepository.findByUsuario(usuario);
+        return reservaRepository.findByUsuarioId(usuarioId);
     }
 
     public Reserva atualizar(Reserva reservaAtualizada, Long id) {

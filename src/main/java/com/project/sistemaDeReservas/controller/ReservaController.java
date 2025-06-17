@@ -24,11 +24,11 @@ public class ReservaController {
     }
 
     @GetMapping
-    public List<Reserva> listarTodas() {
+    public List<ReservaDTO> listarTodas() {
         return reservaService.listarTodas();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{usuarioId}")
     public List<Reserva> listarReservasPorUsuario(@PathVariable Long usuarioId) {
         return reservaService.buscarReservasPorUsuario(usuarioId);
     }
